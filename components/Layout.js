@@ -2,24 +2,11 @@ import React from 'react'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import SignUp from './SignUp';
-
+import { useSession } from "next-auth/react"
 const Layout = ({ children }) => {
 
     
-    const [token, setToken] = React.useState(true);
-
-    React.useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setToken(true);
-        }
-    }, []);
-
-    if (!token) {
-        return (
-            <SignUp />
-        )
-    }
+    const { data: session, status } = useSession()
 
     return (
         <>
